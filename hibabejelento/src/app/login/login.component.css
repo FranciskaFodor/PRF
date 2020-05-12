@@ -1,0 +1,56 @@
+.example-card1 {
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+.example-card2 {
+  margin-bottom: 125px;
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+.main-card {
+  width: 40%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+::ng-deep.mat-tab-label .mat-tab-label-content {
+  flex-wrap: wrap!important;
+}
+
+::ng-deep.mat-tab-label .mat-tab-label-content span{
+  display: flex!important;
+  flex: 1 0 100%!important;
+  justify-content: center!important;
+}
+
+.register-button-form {
+  margin-left: 200px;
+}
+
+.login-button-form {
+  margin-left: 50px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 10px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+  background-color: blue !important;
+}
+
+.example-full-width {
+  margin-right: 100px;
+}
+
+
+
