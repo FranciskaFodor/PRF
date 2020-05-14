@@ -12,11 +12,15 @@ import {MatInputModule} from '@angular/material';
 import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 
+import {HttpClientModule} from "@angular/common/http";
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,8 @@ import {MatButtonModule} from "@angular/material/button";
     MatTabsModule,
     FormsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

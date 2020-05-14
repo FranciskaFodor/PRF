@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from "../services/login.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -17,17 +19,40 @@ export class LoginComponent implements OnInit {
   confirmPassword: string;
   remember = false;
   rememberCheckbox = false;
+  msg: string;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
 
   ngOnInit() {
+    localStorage.clear();
+    this.route.params.subscribe(params => {
+      console.log(params);
+      if(params.msg) {
+        this.msg = params.msg;
+      } else {
+        this.msg = "";
+      }
+    })
   }
 
-  login(){
-
+  login() {
+    this.loginService.login(this.username, this.password).subscribe(data => {
+      console.log('data', data);
+      localStorage.setItem('username', this.username);
+      this.router.navigate(['/dashboard']);
+    }, error => {
+      alert('Hibás felhasználónév vagy jelszó!');
+    });
   }
 
-  register(){
+  register() {
+    this.loginService.register(this.registerUsername, this.registerPassword).subscribe(data => {
+      console.log('data', data);
+      localStorage.setItem('username', this.registerUsername);
+      this.router.navigate(['/dashboard']);
+    }, error => {
+      alert('Hibás adatok!');
+    });
 
   }
 
