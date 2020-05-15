@@ -12,8 +12,10 @@ const app = express();
 const dbUrl = 'mongodb://localhost:27017';
 
 require('./models/user.model');
+require('./models/complaint.model');
 
 const userModel = mongoose.model('user');
+const complaintModel = mongoose.model('complaint');
 
 mongoose.connect(dbUrl);
 
@@ -25,7 +27,20 @@ mongoose.connection.on('error', function(error) {
     console.log('Error during the database connection', error);
 });
 
+var whitelist = ['https://localhost:3000/login', 'https://localhost:3000/logout', 'https://localhost:3000/register'];
+var corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+};
+
 app.use(cors());
+//app.options('*', cors());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -38,7 +53,7 @@ app.use(bodyParser.json());
 const pointlessMiddleware = (req, res, next) => {
     req.pointless = 'This middleware is absolutely pointless but is at least a good example';
     next(); // req, res are automatically forwarded to the next middleware on the execution chain
-}
+};
 
 // The cookieParser and bodyParser methods are also middlewares. After they handled the request, it will have the body
 // as an object in the req.body attribute. If a middleware runs before these two, they will perceive the req.body as undefined
@@ -49,7 +64,7 @@ const thisMakesSense= (req, res, next) => {
     } else {
         next();
     }
-}
+};
 
 app.use(pointlessMiddleware);
 
@@ -83,6 +98,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', require('./routes/user'));
+app.use('/', require('./routes/complaint'));
 
 // I protect every route with the /inner prefix with the thisMakeSense middleware
 app.use('/inner', thisMakesSense);

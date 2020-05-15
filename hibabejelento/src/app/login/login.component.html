@@ -3,88 +3,7 @@
     <mat-tab-group mat-stretch-tabs="mat-stretch-tabs">
       <mat-tab>
         <ng-template mat-tab-label="mat-tab-label">
-          <span class="tab-text">Register</span>
-        </ng-template>
-
-        <div class="div1">
-          <mat-card class="example-card1">
-            <mat-card-header>
-              <mat-card-title class="title-form">
-                <h2>Register</h2>
-              </mat-card-title>
-            </mat-card-header>
-
-            <mat-card-content>
-              <form class="example-form">
-                <table class="example-full-width" cellspacing="10">
-                  <tr>
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput="matInput" placeholder="Firstname" [(ngModel)]="firstname" name="firstname" required="required">
-                      </mat-form-field>
-                    </td>
-
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput="matInput" placeholder="Lastname" [(ngModel)]="lastname" name="lastname" required="required">
-                      </mat-form-field>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <br>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput="matInput" placeholder="Username" [(ngModel)]="registerUsername" name="Username" required="required">
-                      </mat-form-field>
-                    </td>
-
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput="matInput" placeholder="Password" [(ngModel)]="registerPassword" type="password" name="Password" required="required">
-                      </mat-form-field>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <br>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput="matInput" placeholder="your@email.com" [(ngModel)]="email" name="email" required="required">
-                      </mat-form-field>
-                    </td>
-
-                    <td>
-                      <mat-form-field class="example-full-width">
-                        <input matInput="matInput" placeholder="Confirm Password" [(ngModel)]="confirmPassword" type="password" name="Confirm Password"
-                               required="required">
-                      </mat-form-field>
-                    </td>
-                  </tr>
-                </table>
-              </form>
-
-            </mat-card-content>
-            <mat-card-actions class="register-button-form">
-              <button mat-raised-button (click)="register()" color="primary">Register</button>
-            </mat-card-actions>
-          </mat-card>
-        </div>
-      </mat-tab>
-
-      <mat-tab>
-        <ng-template mat-tab-label="mat-tab-label">
-          <span class="tab-text">Login</span>
+          <span class="tab-text">Bejelentkezés</span>
         </ng-template>
 
         <div class="div2">
@@ -101,7 +20,7 @@
                   <tr>
                     <td>
                       <mat-form-field class="example-full-width2">
-                        <input matInput="matInput" placeholder = Username [(ngModel)]="username" name="username" required="required">
+                        <input matInput="matInput" placeholder = Felhasználónév [(ngModel)]="username" name="username" required="required">
                       </mat-form-field>
                     </td>
                   </tr>
@@ -109,7 +28,7 @@
                   <tr>
                     <td>
                       <mat-form-field class="example-full-width2">
-                        <input matInput="matInput" placeholder = Password [(ngModel)]="password" type="password" name="password" required="required">
+                        <input matInput="matInput" placeholder = Jelszó [(ngModel)]="password" type="password" name="password" required="required">
                       </mat-form-field>
                     </td>
                   </tr>
@@ -121,7 +40,89 @@
 
 
             <mat-card-actions class="login-button-form">
-              <button mat-raised-button="mat-raised-button" (click)="login()" color="primary">Login</button>
+              <button mat-raised-button="mat-raised-button" (click)="login()" color="primary">Bejelentkezés</button>
+              <button mat-raised-button="mat-raised-button" (click)="createAdmin()" color="primary">Admin létrehozása</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label="mat-tab-label">
+          <span class="tab-text">Regisztráció</span>
+        </ng-template>
+
+        <div class="div1">
+          <mat-card class="example-card1">
+            <mat-card-header>
+              <mat-card-title class="title-form">
+                <h2>Register</h2>
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+              <form class="example-form">
+                <table class="example-full-width" cellspacing="10">
+                  <tr>
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput="matInput" placeholder="Vezetéknév" [(ngModel)]="vezeteknev" name="vezeteknev" required="required">
+                      </mat-form-field>
+                    </td>
+
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput="matInput" placeholder="Keresztnév" [(ngModel)]="keresztnev" name="keresztnev" required="required">
+                      </mat-form-field>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <br>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput="matInput" placeholder="Felhasználónév" [(ngModel)]="registerUsername" name="Username" required="required">
+                      </mat-form-field>
+                    </td>
+
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput="matInput" placeholder="Jelszó" [(ngModel)]="registerPassword" type="password" name="Password" required="required">
+                      </mat-form-field>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <br>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput="matInput" placeholder="pelda@email.com" [(ngModel)]="email" name="email" required="required">
+                      </mat-form-field>
+                    </td>
+
+                    <td>
+                      <mat-form-field class="example-full-width">
+                        <input matInput="matInput" placeholder="Jelszó megerősítése" [(ngModel)]="confirmPassword" type="password" name="Confirm Password"
+                               required="required">
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                </table>
+              </form>
+
+            </mat-card-content>
+            <mat-card-actions class="register-button-form">
+              <button mat-raised-button (click)="register()" color="primary">Regisztráció</button>
             </mat-card-actions>
           </mat-card>
         </div>

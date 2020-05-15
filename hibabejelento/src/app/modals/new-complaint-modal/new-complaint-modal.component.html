@@ -1,0 +1,39 @@
+<mat-card class="complaint-card">
+  <h1 mat-dialog-title>Hibabejentés</h1>
+  <form>
+    <mat-form-field>
+      <mat-label>Szolgáltatás típusa</mat-label>
+      <mat-select [(ngModel)]="szolgTipus" name="szolgaltatas" required="required">
+        <mat-option *ngFor="let szolg of szolgaltatasok" [value]="szolg.value">
+          {{szolg.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Hiba leírása</mat-label>
+      <textarea rows="5" matInput [(ngModel)]="hibaLeiras" name="hibaLeiras" placeholder="A hiba leírása..." required="required"></textarea>
+    </mat-form-field>
+
+    <div>
+      <mat-form-field class="another-width">
+        <mat-label>Cím</mat-label>
+        <input matInput [(ngModel)]="cim" name="cim"  required="required">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="another-width">
+        <mat-label>Telefonszám</mat-label>
+        <input matInput [(ngModel)]="telefon" name="telefon"  required="required">
+      </mat-form-field>
+    </div>
+
+
+  </form>
+
+  <mat-card-actions>
+    <button mat-raised-button="mat-raised-button"  color="primary" (click)="closeModal()">Vissza</button>
+    <button mat-raised-button="mat-raised-button"  color="primary" (click)="makeComplaint()">Beküldés</button>
+  </mat-card-actions>
+</mat-card>

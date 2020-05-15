@@ -14,13 +14,24 @@ import {MatButtonModule} from "@angular/material/button";
 
 import {HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatTableModule} from "@angular/material/table";
+import { NewComplaintModalComponent } from './modals/new-complaint-modal/new-complaint-modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatSelectModule} from "@angular/material/select";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { UserDetailsModalComponent } from './modals/user-details-modal/user-details-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    NewComplaintModalComponent,
+    AdminDashboardComponent,
+    UserDetailsModalComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +43,20 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FormsModule,
     MatInputModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatTableModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatSnackBarModule
+
   ],
   providers: [],
+  entryComponents: [
+    NewComplaintModalComponent,
+    UserDetailsModalComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

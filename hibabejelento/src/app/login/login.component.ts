@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from "../services/login.service";
+import {UserService} from "../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login',
@@ -9,19 +10,18 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  firstname: string;
-  lastname: string;
+  vezeteknev: string;
+  keresztnev: string;
   registerUsername: string;
   username: string;
   password: string;
   registerPassword: string;
   email: string;
   confirmPassword: string;
-  remember = false;
-  rememberCheckbox = false;
   msg: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private loginService: LoginService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     localStorage.clear();
@@ -36,23 +36,48 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loginService.login(this.username, this.password).subscribe(data => {
+    this.userService.login(this.username, this.password).subscribe(data => {
       console.log('data', data);
       localStorage.setItem('username', this.username);
-      this.router.navigate(['/dashboard']);
+      localStorage.setItem('role', data.user.role);
+      if (data.user.role === 'admin') {
+        this.router.navigate(['/admin-dashboard']);
+      } else {
+        this.router.navigate(['/dashboard']);
+      }
+
     }, error => {
       alert('Hibás felhasználónév vagy jelszó!');
     });
   }
 
   register() {
-    this.loginService.register(this.registerUsername, this.registerPassword).subscribe(data => {
-      console.log('data', data);
-      localStorage.setItem('username', this.registerUsername);
-      this.router.navigate(['/dashboard']);
+    if(this.registerPassword === this.confirmPassword){
+      this.userService.register(this.registerUsername, this.registerPassword, "user", this.vezeteknev, this.keresztnev, this.email).subscribe(data => {
+        console.log('data', data);
+        localStorage.setItem('username', this.registerUsername);
+        this.router.navigate(['/dashboard']);
+      }, error => {
+        alert('Hibás adatok!');
+      });
+    } else {
+      alert("Nem egyezik a két jelszó!")
+    }
+  }
+
+  createAdmin() {
+    const admin = "admin";
+    this.userService.register(admin, admin, admin, admin, admin, admin ).subscribe(data => {
+      localStorage.setItem('username', admin);
+      this.snackBar.open('Admin sikeresen létrehozva! Most már admin-admin ' +
+        ' felhasználónév-jelszó párossal bejelenetkezhetsz admin jogosultsággal!', '', {
+        duration: 8000,
+      });
+      this.router.navigate(['/admin-dashboard']);
     }, error => {
-      alert('Hibás adatok!');
+      alert('Szerepel már admin az adatbázisban! (Felhasználónév: admin, jelszó: admin)');
     });
+
 
   }
 
